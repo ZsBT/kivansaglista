@@ -1,4 +1,7 @@
 <?php
+/** csak egy extra pelda, hogy egyeb hatter-szerviz funkciok is konnyen implementalhatok */
+
+
 namespace app\kivansag\szerviz;
 
 require_once(__DIR__."/../lib/autoload.php");
@@ -13,10 +16,10 @@ $sig = new \zs\sighandler( function($signo) {
 
 
 while(1){
-#    $db = \app\kivansag\db::instance();$most = $db->oneValue("Select now()");
+    $db = \app\kivansag\db::instance();$most = $db->oneValue("Select now()");
     
-    printf("TICK! ekkor: %s pidem: %d\n", $most, \getmypid() );
-    sleep(3);
+    printf("TICK! ekkor: %s pidem: %d\n", @$most, \getmypid() );
+    sleep(30);
     
     if($sig->signal())break;
     
