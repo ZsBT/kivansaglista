@@ -1,0 +1,22 @@
+/** ezek az egyedi stilusok a gyariakat felulirva */
+.hidden { display:none; }
+.uc { text-transform: uppercase; }
+.fuc:first-letter { text-transform: uppercase; }
+.bg-anysarga { background-color: #e0f07d !important; color: #006b54; }
+.bg-anyzold { background-color: #00546b !important; }
+
+.card-body p { text-align: justify; }
+
+.topbar { background: #efe url("../img/dzsini.png") no-repeat center top; 
+    background-size: 100px 50px; }
+
+.toast-header {background-color: #ffd;}
+.toast {
+    position: fixed; right: 0;
+    min-width: 250px;
+    background-color: #ffe;
+}
+
+.align-right { text-align: right; }
+
+a.fa { padding: 0 1em; display: inline-block; }

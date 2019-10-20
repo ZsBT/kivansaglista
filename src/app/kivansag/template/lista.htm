@@ -1,0 +1,126 @@
+{config_load file="site.ini"}
+{include 'z-elotte.htm'}
+
+{if !$USER}
+  <h5 class='alert alert-danger'>bejelentkezés szükséges.</h5>
+{else}
+<div class=row nonce="{nonce}">
+    <div class="col-md-12 col-lg-6">
+        <h1>Kívánságlistáim</h1>
+        <p>kattints egy sorra a lista megtekintéséhez, dupla kattintással pedig a módosításhoz.</p>
+    
+        <table id="dtList" class="table table-striped table-bordered" style="width:100%">
+          <thead><tr>
+            <th>Lista neve</th>
+            <th>Összérték ({#penznem#})</th>
+            <th>Létrehozva</th>
+          </tr></thead><tbody></tbody>
+        </table>
+        
+        <button id=showListModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#ListModal">
+          Új kívánságlista
+        </button>
+
+        <div class="modal fade" id="ListModal" tabindex="-1" role="dialog" aria-labelledby="addListModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addListModalLabel">Lista neve</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class=row>
+                  <div class=col-md-6>
+                    <input type=hidden id=ListID value=0>
+                    <label>Megnevezés: <input type=text id=ListName class=form-control></label>
+                  </div>
+                  <div align=right class="hidden share col-md-6">
+                    <a title="megosztás hivatkozáson keresztül" class='share fa fa-share-alt' target=_blank></a>
+                    <a title="hivatkozás újragenerálása és a korábbiak érvénytelenítése" id=regenshare class='fa fa-redo' href="#"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id=listDel>Törlés</button>
+                <button type="button" class="btn btn-primary" id=listSave>Mentés</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
+              </div>
+            </div>
+          </div>
+        </div><!--.modal-->
+
+    </div><!--.col-->
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+      <div class="toast" role=alert aria-live="assertive" aria-atomic="true" style="">
+        <div class="toast-header">
+          <strong class="mr-auto">...</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">...</div>
+      </div>
+    </div>
+    
+    
+    <div class="col-md-12 col-lg-6 hidden kivansag">
+        <p>&nbsp;</p><hr>
+        <h4><q id=listName></q> lista kívánságai</h4>
+        <p>Kattintson egy sorra a szerkesztéshez.</h5>
+        <table id="dtWish" class="table table-striped table-bordered" style="width:100%">
+          <thead><tr>
+            <th>Megnevezés</th>
+            <th>Ár ({#penznem#})</th>
+            <th>Létrehozva</th>
+          </tr></thead><tbody></tbody>
+        </table>
+        
+        <button id=showWishModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#WishModal">
+          Új kívánság
+        </button>
+
+
+        <div class="modal fade" id="WishModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">kívánság részletei</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <input type=hidden id=WishID value=0>
+                <input type=text id=WishName class=form-control placeholder="megnevezés">
+                <input type=number min=0 id=WishPrice class=form-control placeholder="becsült ár ({#penznem#})">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id=wishDel>Törlés</button>
+                <button type="button" class="btn btn-primary" id=wishSave>Mentés</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
+              </div>
+
+            </div>
+          </div>
+        </div><!--.modal-->
+
+    </div>
+    
+</div><!--.row-->
+
+
+
+
+
+
+
+
+
+{/if}
+{include 'z-utana.htm'}

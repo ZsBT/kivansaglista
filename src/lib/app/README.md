@@ -1,0 +1,1 @@
+minden context alatt kozos libek

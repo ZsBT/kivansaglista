@@ -1,0 +1,83 @@
+{config_load file="site.ini"}
+{include 'z-elotte.htm'}
+
+<div class=row>
+    <div class=col-md-12>
+        <h1>Üdvözlünk a kívánságok világában!</h1>
+        <p>kattints egy szekció nevére a kifejtéshez vagy válassz a bal oldali menüből.</p>
+    </div>
+    
+      <div class="col-md-12 col-lg-12 card shadow mb-4">
+        <a href="#card1" class="d-block card-header py-3" data-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="card1">
+          <h6 class="m-0 font-weight-bold text-primary">a kiszolgáló felépítése</h6>
+        </a>
+        <div class="collapse" id="card1">
+          <div class="card-body"><p>
+              Említettétek a Dockert, emiatt választottam én is ezt a
+              környezetet. Így esetleg ki tudjátok próbálni az üzemeltetéssel,
+              mennyire macerás a telepítése. A <code>docker-compose up --build</code>
+              parancs a docker könyvtárban futtatva lehúzza az alapképeket és megcsinál mindent.
+              Létrehozza az adatbázis sémát is meg el is indítja a konténereket.
+              </p><p>
+              A 80-as porton fog figyelni az alkalmazás, illetve a http://127.5.0.1:3080/ címen pedig egy egyszerű
+              webes (gyári) adatbázisnézegető, amit persze az éles környezetben már nem hagyunk ott.
+              </p>
+          </div>
+        </div>
+      </div><!--.card-->
+
+
+      <div class="col-md-12 col-lg-12 card shadow mb-4">
+        <a href="#card2" class="d-block card-header py-3" data-toggle="collapse" role="button"
+        aria-expanded="false" aria-controls="card2">
+          <h6 class="m-0 font-weight-bold text-primary">könyvtárszerkezet</h6>
+        </a>
+        <div class="collapse" id="card2">
+          <div class="card-body">
+            <p>A docker könyvtár az nginx webszerver, php-fpm és az adatbáziskezelő konfigurációs fájljait is tartalmazza,
+            továbbá az adatbázis-sémát létrehozó SQL-t.
+            Ennél fontosabb az <code>src</code> könyvtár,
+            hiszen ez tartalmazza az alkalmazás forráskódját.</p><p>
+            Ezek tételesen az alábbiak:
+<pre>
+.
+├── app:  a szerveren elérhető context path-ok
+│   ├── kivansag:  a webszerver /kivansag/ context-je
+│   │   ├── config:  ezen context paraméterei
+│   │   ├── lib:  ezen context osztályai
+│   │   ├── szerviz:  háttérfolyamatok
+│   │   ├── template:  a HTML oldalak, ez a lényegi rész
+│   │   │   ├── ajax:  pont az
+│   │   │   └── api:  REST api helye
+│   │   └── www:  statikus fájlok
+│   └── _root:  root context tartalma
+├── config:  globális beállítások
+└── lib:  globális osztályok
+    ├── app:  minden context közös osztályai
+    ├── vendor:  gyári (composer) PHP libek
+    └── zs:  saját általános libek
+</pre>
+            <p>BootStrap-et töltöttem le, illetve Smarty template-kezelőt.
+            Ez utóbbi egyszerű és "buta", MVC/CMS keretrendszereket nem
+            ajánlok mert tele vannak biztonsági résekkel amit a hackerek
+            automatákkal, scriptekkel törnek botnetekről.</p>
+          </div>
+        </div>
+      </div><!--.card-->
+
+
+      <div class="col-md-12 col-lg-12 card shadow mb-4">
+        <a href="#card3" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true"
+        aria-controls="card3">
+          <h6 class="m-0 font-weight-bold text-primary">dokumentáció</h6>
+          
+        </a>
+        <div class="collapse" id="card3">
+          <div class="card-body">
+          </div>
+        </div>
+      </div><!--.card-->
+</div><!--.row-->
+
+{include 'z-utana.htm'}
