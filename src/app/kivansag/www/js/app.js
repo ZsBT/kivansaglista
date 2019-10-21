@@ -12,7 +12,7 @@
     // lista
     var dtUser = $("#dtUser").DataTable({
       "ajax":"ajax/user/list",
-      "language":{search:"Keresés"},
+      "language":{url:"js/dt-hu.lang"},
       "columns":[
         {data:"azonosito"},
         {data:"nev"},
@@ -91,7 +91,7 @@
 
   var dtList = $("#dtList").DataTable({	// lista datatables
     "ajax":"ajax/list/list",
-    "language":{search:"Keresés"},
+    "language":{url:"js/dt-hu.lang"},
     "columns":[
       {data:"nev"},
       {data:"ar",className:'align-right'},
@@ -100,7 +100,7 @@
   })
 
   var dtWish = $("#dtWish").DataTable({ // kivansag datatables
-    "language":{search:"Keresés"},
+    "language":{url:"js/dt-hu.lang"},
     "columns":[
       {data:"nev"},
       {data:"ar",className:'align-right'},
