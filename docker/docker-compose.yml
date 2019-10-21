@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  php-fpm:
+  kivansag-php:
     depends_on:
-      - db
+      - kivansag-db
     build:
       context: ./php-fpm
     restart: always
@@ -11,9 +11,9 @@ services:
       - ../src:/var/www
       - ./php-fpm/php.ini:/usr/local/etc/php/conf.d/custom.ini
 
-  nginx:
+  kivansag-nginx:
     depends_on: 
-      - php-fpm
+      - kivansag-php
     restart: always
     build:
       context: ./nginx
@@ -25,7 +25,7 @@ services:
     ports:
       - "80:80"
   
-  db:
+  kivansag-db:
     image: postgres
     restart: always
     environment:
@@ -33,15 +33,17 @@ services:
     volumes:
       - ./createschema.sql:/docker-entrypoint-initdb.d/1-createschema.sql
   
-  dbadm:
+  kivansag-dbadm:
     depends_on:
-      - db
+      - kivansag-db
     image: adminer
     restart: always
     ports:
       - "127.5.0.1:3080:8080"
 
-  szerviz:
+  kivansag-szerviz:
+    depends_on:
+      - kivansag-db
     build:
       context: ./szerviz
     volumes:
