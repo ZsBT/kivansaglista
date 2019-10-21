@@ -5,9 +5,12 @@
 -- mas hozzaallas persze, ha pl myslq-ben ugysem hasznalunk szekvenciat csak autoincrementet,
 -- hogy ne legyenek "lukak" es elkeruljuk az eszrevetlen, utolagos adattorlest.
 -- mondjuk az adatgazda altal vegzett manipulacio ellenorzesere blockchain algoritmust hasznalnek, de ez kulon sztori.
+create user php password '2dfb6bc51751727962e7b61d18a4ddb6';
+create database adatbazis owner php;
+\c adatbazis;
 
 create sequence nextid;
-
+alter sequence nextid owner to php;
 
 -- 'nagyon' PG-specifikus oszloptipusokat nemigen szeretek hasznalni, mert kesobb kiderulhet hogy mas DB szerver kell.
 -- igyekezzunk csokkenteni a remalmon, hogy migralas soran sokat kelljen masszirozni az alkalmazas kodjat.
@@ -51,3 +54,7 @@ create table kivansag(id bigint primary key default nextval('nextid')
 -- csak egyedi kivansag lehet listankent
 create unique index kivansag_uix on kivansag(lista,nev);
 
+
+alter table felhasznalo owner to php;
+alter table kivansaglista owner to php;
+alter table kivansag owner to php;
