@@ -17,8 +17,8 @@ session_name("JSESSIONID");
 session_start();
 header("X-Powered-By: dotnet");
 header("Server: IIS");
-
-
+header("X-XSS-Protection: 1; mode=block");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 $ini = parse_ini_file("config/local.ini",1);
 
 

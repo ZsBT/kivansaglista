@@ -2,6 +2,7 @@
 
 namespace app;
 
+/**	a Smarty template fajlokban hasznalhato fuggvenyek.	*/
 class smartyplugins {
 
     
