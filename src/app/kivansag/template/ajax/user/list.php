@@ -13,7 +13,7 @@ if($U->jog<user::JOG_ADMIN) http_response_code("403") and exit;
         $rec->aktivH = $rec->aktiv ? "aktív":"inaktív";
         $rec->letrehozva = substr($rec->letrehozva,0,16);
         $rec->modositva = substr($rec->modositva,0,16);
-        switch($rec->jog){
+        switch($rec->jog){	// emberi szemnek kellemesebb feliratok a DataTables szamara
             case user::JOG_USER:
                 $rec->jogH = "felhasználó";
                 break;
@@ -21,6 +21,7 @@ if($U->jog<user::JOG_ADMIN) http_response_code("403") and exit;
                 $rec->jogH = "admin";
                 break;
         }
+        unset($rec->jelszo);
         return $rec;
     },db::instance()->allRow("select * from felhasznalo")) ]	// ...az osszes rekordot
 );

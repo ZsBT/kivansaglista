@@ -24,7 +24,7 @@ $ini = parse_ini_file("config/local.ini",1);
 
 # csak a sajat context path engedelyezett!
 $context = \app\kivansag\config::get("site")["context"];
-if(!preg_match("~^".$context."([a-z0-9/_-]+)~i",$_SERVER["REQUEST_URI"],$ma))die("#invalid context#");
+if(!preg_match('~^'.$context.'([a-z0-9/_-]+)~i',$_SERVER["REQUEST_URI"],$ma))die("#invalid context#");
 
 
 # ez lesz a "szep URL" eleresi utja. ne lehessen trukkozni szulokonytarba lepessel.
@@ -48,8 +48,11 @@ $sm->assign([
 ]);
 
 # HTTP GET/POST adatok. eleve a bemenetet módosítjuk XSS / SQL befecskendezés ellen
-foreach( $_REQUEST as $k=>$v )
+foreach( $_REQUEST as $k=>$v ){
+    if(strlen($v)>500)	// ha gyanusan hosszu a request, feltetelezhetoen PHP kod injekcio a cel...
+        http_reponse_code(400) and exit;	// ... ezert dobjuk a valaszt.
     $_REQUEST[$k] = @str_replace(['<','>',"'"],['&lt;','&gt;','`'],$v);
+}
 
 # ezekre tobbe nincs szuksegunk, veletlenul se hasznalja senki 8 ev mulva sem.
 unset($_POST);unset($_GET);

@@ -43,14 +43,16 @@ class smartyplugins extends \app\smartyplugins {
 
     /** megosztott kivansaglista */
     function function_kivansaglista($parm,$tpl){
-        if(!user::current())
+        if(!$U=user::current())
             $tpl->assign("error","megosztott kívánságlista megtekintéséhez bejelentkezés szükséges.");
         else {
             $hash = @$_REQUEST['hash'];
             
-            if(!preg_match('/^[0-9a-z]{4,80}$/',$hash) or !$lid=db::instance()->oneValue("select id from kivansaglista where linkhash='$hash'"))
+            if(!preg_match('/^[0-9a-z]{4,80}$/',$hash) or !$lid=db::instance()->oneValue("select id from kivansaglista where linkhash='$hash'")) {
                 $tpl->assign("error", "érvénytelen hivatkozás"); 
-            else {
+                $U->logger->warn("#{$U->id} felhasználó érvénytelen kívánságlistát akart nézni: $hash");
+            } else {
+                $U->logger->info("#{$U->id} felhasználó megnézte a #id kívánságlistát");
                 $wishlist = new wishlist($lid);
                 $user = new user($wishlist->felhasznalo);
                 $wishes = $wishlist->wishes();
@@ -85,7 +87,7 @@ class smartyplugins extends \app\smartyplugins {
                     // sikeres azonositas
                     $_SESSION['USER'] = $user;
                     // atiranyitas kezdolapra
-                    $user->logger->notice("{$user->azonosito} bejelentkezett");
+                    $user->logger->notice("#{$user->id} {$user->azonosito} bejelentkezett");
                     msga::put("sikeres bejelentkezés","success");
                     header("Location: ./");exit;
                 }
