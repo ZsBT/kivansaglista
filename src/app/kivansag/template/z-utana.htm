@@ -56,7 +56,9 @@
   <script src="{#context#}/js/sb-admin-2.js"></script>
   <script src="{#context#}/js/sha256.js"></script>
   <script src="{#context#}/js/app.js"></script>
-
+{if $USER.jog==$JOG_ADMIN}
+  <script src="{#context#}/js/app-admin.js"></script>
+{/if}
 </body>
 
 </html>
