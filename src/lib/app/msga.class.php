@@ -1,7 +1,9 @@
 <?php
 namespace app;
 
-/** stackelt uzenetek rogzitese sessionben */
+/** stackelt uzenetek rogzitese sessionben.
+ * ezeket a HTML feluleten hasznaljuk, hogy a lap ujratoltesekor megjelenitsuk
+ */
 class msga {
 
     /** uzenet hozzaadasa */
