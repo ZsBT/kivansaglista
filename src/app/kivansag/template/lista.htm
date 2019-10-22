@@ -1,7 +1,7 @@
 {config_load file="site.ini"}
 {include 'z-elotte.htm'}
 
-{if $USER->jog<>$JOG_USER}
+{if $USER.jog<>$JOG_USER}
   <h5 class='alert alert-danger'>jogosultság megtagadva</h5>
 {else}
 <div class=row nonce="{nonce}">
