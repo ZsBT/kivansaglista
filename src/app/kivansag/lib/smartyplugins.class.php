@@ -50,7 +50,7 @@ class smartyplugins extends \app\smartyplugins {
             
             if(!preg_match('/^[0-9a-z]{4,80}$/',$hash) or !$lid=db::instance()->oneValue("select id from kivansaglista where linkhash='$hash'")) {
                 $tpl->assign("error", "érvénytelen hivatkozás"); 
-                $U->logger->warn("#{$U->id} felhasználó érvénytelen kívánságlistát akart nézni: $hash");
+                $U->logger->warning("#{$U->id} felhasználó érvénytelen kívánságlistát akart nézni: $hash");
             } else {
                 $U->logger->info("#{$U->id} felhasználó megnézte a #id kívánságlistát");
                 $wishlist = new wishlist($lid);
