@@ -28,5 +28,5 @@ _install_docker_compose(){
 cd -P $(dirname $0) || exit 1
 which docker-compose || _install_docker_compose || exit 2
 docker-compose up --build --no-start || exit 3
-
+docker-compose start
 exit 0

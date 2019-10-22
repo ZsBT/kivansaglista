@@ -40,11 +40,14 @@ $sm->setCacheDir($ini['dirs']['cache']);
 # fuggvenyek regisztralasa, melyeket a template-ekben hasznalhatunk
 \app\kivansag\smartyplugins::register($sm);
 
+# ezek a valtozok hasznalhatok mindig a template-ekben
 $sm->assign([
     "path" => $path,
     "context" => $context,
     "spath" => json_encode($path),
     "USER" => (array)$_SESSION['USER'],
+    "JOG_USER" => \app\kivansag\user::JOG_USER,
+    "JOG_ADMIN"=> \app\kivansag\user::JOG_ADMIN,
 ]);
 
 # HTTP GET/POST adatok. eleve a bemenetet módosítjuk XSS / SQL befecskendezés ellen

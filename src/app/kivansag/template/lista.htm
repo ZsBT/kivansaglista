@@ -1,8 +1,8 @@
 {config_load file="site.ini"}
 {include 'z-elotte.htm'}
 
-{if !$USER}
-  <h5 class='alert alert-danger'>bejelentkezés szükséges.</h5>
+{if $USER->jog<>$JOG_USER}
+  <h5 class='alert alert-danger'>jogosultság megtagadva</h5>
 {else}
 <div class=row nonce="{nonce}">
     <div class="col-md-12 col-lg-6">
