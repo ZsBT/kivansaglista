@@ -26,7 +26,7 @@ if($U->id == $user->id) msga::put("saját magad nem módosíthatod!","danger"); 
         $db = db::instance();
         $db->begin();
         if( $user->update() ){
-            $db->exec("update felhasznalo set modositva=now() where id=$id");
+            $db->exec("update felhasznalo set modositva=now() where id={$user->id}");
             msga::put($msg="felhasználó módosítása sikeres",'success');
         } else msga::put($msg="felhasználó módosítása SIKERTELEN",'danger');
         $db->commit();
