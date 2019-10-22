@@ -9,7 +9,7 @@ if(!\zs\nonce::check()) http_response_code(403) and exit;
 if(!$_REQUEST['id']) http_response_code(400) and exit;
 
 // modositando felhasznalo
-$user = new user($_REQUEST['id']);
+$user = new user(0+$_REQUEST['id']);
 
 if($U->id == $user->id) msga::put("saját magad nem módosíthatod!","danger"); else {
 
@@ -26,7 +26,7 @@ if($U->id == $user->id) msga::put("saját magad nem módosíthatod!","danger"); 
         $db = db::instance();
         $db->begin();
         if( $user->update() ){
-            $db->exec("update felhasznalo set modositva=now()");
+            $db->exec("update felhasznalo set modositva=now() where id=$id");
             msga::put($msg="felhasználó módosítása sikeres",'success');
         } else msga::put($msg="felhasználó módosítása SIKERTELEN",'danger');
         $db->commit();
