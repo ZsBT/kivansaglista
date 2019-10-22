@@ -5,6 +5,8 @@
 namespace app\kivansag\router;
 
 
+ini_set('display_errors',0);
+
 // osztaly SPL-ek toltese
 require_once("../lib/autoload.php");
 chdir(__DIR__."/../../..");
